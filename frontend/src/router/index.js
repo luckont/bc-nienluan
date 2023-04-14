@@ -6,6 +6,8 @@ import InfoPage from "@/views/InfoPage.vue";
 import StudentPage from "@/views/StudentPage.vue";
 import EditStudent from "@/views/EditStudent.vue";
 import AddStudent from "@/views/AddStudent.vue"
+import NotFound from "@/views/NotFound.vue";
+import Admin from "@/views/Admin.vue"
 
 const routes = [
   {
@@ -43,6 +45,16 @@ const routes = [
     name: "student.add",
     component: AddStudent,
   },
+  {
+    path: "/adminB1910100",
+    name: "admin",
+    component: Admin,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "notfound",
+    component: NotFound,
+    },
 ];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -2,14 +2,14 @@
   <div>
     <nav class="navbar navbar-light bg-light p-0">
       <div class="container-fluid">
-        <a class="" href="#">
+        <router-link to="/home">
           <img
             src="https://elearning.ctu.edu.vn/pluginfile.php/1/theme_lambda/logo/1675223774/Asset%2034elearning.png"
             alt=""
             width="416"
             height="84"
           />
-        </a>
+        </router-link>
       </div>
     </nav>
     <ul class="nav bg-dark text-light p-2">
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       username: null,
-      mssv: null,
+      mssv: "",
     };
   },
   mounted() {

@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <StudentForm :student="student" @submit="handleSubmit"/>
+    <StudentForm :student="student" @submit="handleSubmit" />
   </div>
 </template>
 <script>
@@ -12,26 +12,28 @@ export default {
   },
   data() {
     return {
-      student: []
+      student: [],
     };
   },
   methods: {
     async handleSubmit(event) {
       event.preventDefault();
       const studentId = localStorage.getItem("idDK");
-      console.log(this.student.GVHD)
       try {
         const res = await axios.put(`/api/students/${studentId}`, {
           GVHD: this.student.GVHD,
           nameProjectVi: this.student.nameProjectVi,
           nameProjectEn: this.student.nameProjectEn,
           timeCreate: new Date().toLocaleString(),
-        })
-      } catch(error){
-        console.log(error)
+        });
+        if (res.statusText === "OK") {
+          alert("Bạn đã cập nhật thành công !");
+          this.$router.push("/student");
+        }
+      } catch (error) {
+        console.log(error);
       }
-    }
-  }
-  
+    },
+  },
 };
 </script>

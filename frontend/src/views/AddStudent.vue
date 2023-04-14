@@ -42,6 +42,10 @@ export default {
           nameProjectEn: this.student.nameProjectEn,
           timeCreate: new Date().toLocaleString(),
         });
+        if(res.statusText === "OK") {
+          alert("Bạn đã đăng ký báo cáo thành công !")
+          this.$router.push("/student")
+        }
       } catch (error) {
         console.log(error);
       }

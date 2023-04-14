@@ -28,6 +28,7 @@
       <input type="text" id="fileBC" v-model="student.fileBC" required />
     </div> -->
     <button type="submit">Cập nhật</button>
+
   </form>
 </template>
 

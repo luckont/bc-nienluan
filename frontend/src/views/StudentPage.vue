@@ -20,9 +20,14 @@
           >Lưu ý: Thí sinh phải có mặt trước 15p trước giờ báo cáo tại hội đồng
           báo cáo !</strong
         >
-        <button class="btn btn-primary mt-4" @click="editStudent()">
-          Chỉnh sửa thông tin
-        </button>
+        <div class="row mt-4">
+          <button class="btn btn-primary col mr-2" @click="editStudent()">
+            Chỉnh sửa thông tin
+          </button>
+          <button class="btn btn-danger col ml-2" @click="deleteStudent()">
+            Hủy đăng ký
+          </button>
+        </div>
       </div>
       <div class="p-2" v-else>
         <p>Bạn chưa đăng ký báo cáo</p>
@@ -64,23 +69,33 @@ export default {
         this.users = res.data;
         const mssv = this.users.mssv;
         const resStudents = await axios.get(`api/students/?mssv=${mssv}`);
-        if(resStudents.data.length != 0) {
+        if (resStudents.data.length != 0) {
           this.students = resStudents.data[0];
           localStorage.setItem("idDK", resStudents.data[0]._id);
-        }else{
-          console.log("khong co")
+        } else {
+          console.log("khong co");
         }
       } catch (error) {
         console.log(error);
+      }
+    },
+    async deleteStudent() {
+      const idDK = localStorage.getItem("idDK");
+      const res = await axios.delete(`api/students/${idDK}`);
+      if (window.confirm("Bạn có chắc muốn hủy đăng ký !")) {
+        alert("Bạn đã hủy thành công !");
+        window.location.reload();
+      } else {
+        window.location.reload();
       }
     },
     editStudent() {
       const idDK = localStorage.getItem("idDK");
       this.$router.push(`/students/${idDK}`);
     },
-    addStudent(){
+    addStudent() {
       this.$router.push("/students/add");
-    }
+    },
   },
 };
 </script>

@@ -1,3 +1,4 @@
 <template>
-  <div class="mt-4">Hoempage</div>
+  <h1 class="mt-4">Home Page</h1>
 </template>
+
