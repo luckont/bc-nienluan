@@ -9,7 +9,7 @@ class StudentService {
     extractStudentData(payload) {
         const student = {
             GVHD: payload.GVHD,
-            MSSV: payload.MSSV,
+            mssv: payload.mssv,
             name: payload.name,
             email: payload.email,
             nameProjectVi: payload.nameProjectVi,
@@ -41,7 +41,7 @@ class StudentService {
 
     async findByName(mssv) {
         return await this.find({
-            MSSV: { $regex: new RegExp(mssv), $options: "i" },
+            mssv: { $regex: new RegExp(mssv), $options: "i" },
         });
     }
 

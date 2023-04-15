@@ -10,7 +10,7 @@
     </div>
     <div class="col-8 rounded">
       <h4 class="p-2">Thông tin đăng ký báo cáo</h4>
-      <div class="p-2" v-if="students.MSSV">
+      <div class="p-2" v-if="students.mssv">
         <p><strong>Thời gian báo cáo: </strong></p>
         <p>Tên đề tài tiếng việt: {{ students.nameProjectVi }}</p>
         <p>Tên đề tài tiếng Anh: {{ students.nameProjectEn }}</p>
@@ -80,13 +80,17 @@ export default {
       }
     },
     async deleteStudent() {
-      const idDK = localStorage.getItem("idDK");
-      const res = await axios.delete(`api/students/${idDK}`);
-      if (window.confirm("Bạn có chắc muốn hủy đăng ký !")) {
-        alert("Bạn đã hủy thành công !");
-        window.location.reload();
-      } else {
-        window.location.reload();
+      try {
+        const idDK = localStorage.getItem("idDK");
+        if (window.confirm("Bạn có chắc muốn hủy đăng ký !")) {
+          const res = await axios.delete(`api/students/${idDK}`);
+          alert("Bạn đã hủy thành công !");
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     editStudent() {

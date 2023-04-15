@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th>Student ID</th>
+          <th>STT</th>
           <th>Name</th>
           <th>MSSV</th>
           <th>Email</th>
@@ -16,7 +16,7 @@
         <tr v-for="(student, index) in students" :key="student.id">
           <td>{{ index + 1 }}</td>
           <td>{{ student.name }}</td>
-          <td>{{ student.MSSV }}</td>
+          <td>{{ student.mssv }}</td>
           <td>{{ student.email }}</td>
           <td>{{ student.nameProjectVi }}</td>
           <td>{{ student.nameProjectEn }}</td>

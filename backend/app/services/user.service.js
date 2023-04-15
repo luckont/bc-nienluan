@@ -9,7 +9,9 @@ class UsersService {
         const user = {
             username: payload.username,
             password: payload.password,
-            MSSV: payload.MSSV,
+            mssv: payload.mssv,
+            name: payload.name,
+            email: payload.email,
         };
 
         return user;

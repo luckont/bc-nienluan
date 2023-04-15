@@ -22,7 +22,7 @@
       <li class="nav-item">
         <router-link to="/info">Thông tin</router-link>
       </li>
-      <div v-if="mssv" class="ml-auto" >
+      <div v-if="mssv" class="ml-auto">
         <li class="nav-item ml-auto">
           <router-link to="/student">Xin chào!, {{ mssv }}</router-link>
         </li>
@@ -32,7 +32,6 @@
     </ul>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -44,19 +43,22 @@ export default {
   },
   mounted() {
     this.mssv = localStorage.getItem("mssv");
-
   },
   methods: {
     logout() {
-      localStorage.removeItem("mssv");  
-      localStorage.removeItem("idDK");  
+      localStorage.removeItem("mssv");
+      localStorage.removeItem("idDK");
       localStorage.removeItem("id");
-      localStorage.removeItem("username");  
-      this.$router.push("/");
+      localStorage.removeItem("username");
+      this.$router.push("/").then(() => {
+        location.reload();
+      });
     },
-    login(){
-      this.$router.push("/");
-    }
+    login() {
+      this.$router.push("/").then(() => {
+        location.reload();
+      });
+    },
   },
 };
 </script>

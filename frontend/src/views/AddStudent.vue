@@ -26,7 +26,6 @@ export default {
         const idUser = localStorage.getItem("id");
         const res = await axios.get(`http://127.0.0.1:3001/api/users/${idUser}`);
         this.users = res.data;
-        console.log(this.users)
       } catch (error) {
         console.log(error);
       }
@@ -36,7 +35,7 @@ export default {
         const res = await axios.post("/api/students/", {
           email: this.users.email,
           name: this.users.name,
-          MSSV: this.users.mssv,
+          mssv: this.users.mssv,
           GVHD: this.student.GVHD,
           nameProjectVi: this.student.nameProjectVi,
           nameProjectEn: this.student.nameProjectEn,

@@ -46,24 +46,25 @@ export default {
   methods: {
     async login() {
       try {
-        if(this.username == "admin" && this.password === "admin"){
-          this.$router.push("/adminB1910100");
+        if (this.username === "admin" && this.password === "admin") {
+          this.$router.push("/adminB1910100").then(() => {
+            location.reload();
+          });
           localStorage.setItem("mssv", "Admin");
-        }
-        else {
+        } else {
           const response = await axios.post("/api/login", {
-          username: this.username,
-          password: this.password,
-          mssv: this.mssv,
-        });
-        console.log(response.data)
-        // localStorage.setItem("token", response.data.token);
-        localStorage.setItem("username", response.data.username);
-        localStorage.setItem("id", response.data.id);
-        localStorage.setItem("mssv", response.data.mssv);
-
-        // this.$store.dispatch('setUser', username)
-        this.$router.push("/home");
+            username: this.username,
+            password: this.password,
+            mssv: this.mssv,
+          });
+          console.log(response.data);
+          // localStorage.setItem("token", response.data.token);
+          localStorage.setItem("username", response.data.username);
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("mssv", response.data.mssv);
+          this.$router.push("/home").then(() => {
+            location.reload();
+          });
         }
       } catch (error) {
         this.error = error.response.data.message;
@@ -75,7 +76,7 @@ export default {
 
 <style>
 .fg {
-  width: 100%!important;
+  width: 100% !important;
 }
 .card {
   width: 100%;
@@ -84,5 +85,4 @@ export default {
 .btn-primary {
   width: 100%;
 }
-
 </style>
