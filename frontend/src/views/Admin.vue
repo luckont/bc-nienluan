@@ -1,10 +1,19 @@
 <template>
   <div class="pageAdmin p-4 row">
-    <h3 class="m-auto">Quản lý người dùng</h3>
+    <div class="m-auto row">
+      <h3 class="pr-2">
+        <router-link to="/adminB1910100">Quản lý người dùng</router-link>
+      </h3>
+      <h3>/</h3>
+      <h3 class="pl-2">
+        <router-link to="/adminB1910100/hoidong">Quản lý hôi đồng</router-link>
+      </h3>
+    </div>
 
     <div class="row mt-4">
       <div class="listUsers col">
         <h5>Danh sách người dùng</h5>
+
         <table>
           <thead>
             <tr>
@@ -143,8 +152,8 @@ export default {
           email: this.userUp.email,
           name: this.userUp.name,
         });
-        alert("Cập nhật thông tin thành công !")
-        window.location.reload()
+        alert("Cập nhật thông tin thành công !");
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }

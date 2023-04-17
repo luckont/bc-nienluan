@@ -4,6 +4,7 @@ const cors = require('cors');
 const studentsRouter = require('./app/routes/student.route');
 const usersRouter = require('./app/routes/user.route');
 const authRoutes = require('./app/routes/authRoutes.js');
+const hoidongRoutes = require('./app/routes/hoidong.route')
 
 const ApiError = require('./app/api-error');
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/login', authRoutes);
 app.use('/api/students', studentsRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/hoidong', hoidongRoutes)
 
 // handle 404 response
 app.use((req, res, next) => {

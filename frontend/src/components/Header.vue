@@ -20,7 +20,7 @@
         <router-link to="/dangky">Đăng ký</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/info">Thông tin</router-link>
+        <router-link to="/baocao">Báo cáo</router-link>
       </li>
       <div v-if="mssv" class="ml-auto">
         <li class="nav-item ml-auto">
