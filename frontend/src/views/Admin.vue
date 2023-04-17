@@ -42,8 +42,8 @@
               <td>
                 <button class="btn" @click="deleteUser(user._id)">
                   <i
-                    class="fa-regular fa-pen-to-square"
-                    style="color: #527dff"
+                    class="fa-sharp fa-regular fa-circle-xmark"
+                    style="color: #ff0000"
                   ></i>
                 </button>
               </td>

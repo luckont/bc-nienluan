@@ -1,5 +1,5 @@
 <template>
-  <div class="pageAdmin p-4">
+  <div class="pageAdmin p-4 row">
     <div class="m-auto row">
       <h3 class="pr-2">
         <router-link to="/adminB1910100">Quản lý người dùng</router-link>
@@ -46,10 +46,10 @@
                 </button>
               </td>
               <td>
-                <button class="btn">
+                <button class="btn" @click="deleteHD(hoidong._id)">
                   <i
-                    class="fa-regular fa-pen-to-square"
-                    style="color: #527dff"
+                    class="fa-sharp fa-regular fa-circle-xmark"
+                    style="color: #ff0000"
                   ></i>
                 </button>
               </td>
@@ -157,6 +157,38 @@ export default {
         console.log(this.hoidongUp.mshd);
       } catch (error) {
         console.log(error);
+      }
+    },
+    async getUpdate() {
+      try {
+        const id = this.hoidongUp._id;
+        const resUp = await axios.put(
+          `http://localhost:5000/api/hoidong/${id}`,
+          {
+            mshd: this.hoidongUp.mshd,
+            phong: this.hoidongUp.phong,
+            thoigian: this.hoidongUp.thoigian,
+            tenchutich: this.hoidongUp.tenchutich,
+            tenuyvien: this.hoidongUp.tenuyvien,
+            tenthuky: this.hoidongUp.tenthuky,
+            hinhthuc: this.hoidongUp.hinhthuc,
+          }
+        );
+        alert("Cập nhật thông tin thành công !");
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteHD(_id) {
+      if (window.confirm("Bạn có chắc muốn xóa hội đồng này !")) {
+        const res = await axios.delete(
+          `http://localhost:5000/api/hoidong/${_id}`
+        );
+        alert("Hội đồng này đã bị xóa");
+        window.location.reload();
+      } else {
+        alert("Đã hủy");
       }
     },
   },
