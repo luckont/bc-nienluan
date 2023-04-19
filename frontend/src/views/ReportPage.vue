@@ -1,35 +1,33 @@
 <template>
   <div class="mt-4">
     <h4 class="mb-4 text-center">
-      DANH SÁCH HỘI ĐỒNG BẢO VỆ LUẬN VĂN TỐT NGHIỆP NGHÀNH CÔNG NGHỆ THÔNG TIN
+      DANH SÁCH HỘI ĐỒNG BẢO VỆ LUẬN VĂN TỐT NGHIỆP <br />
+      NGHÀNH CÔNG NGHỆ THÔNG TIN
     </h4>
-    <table>
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>MSSV</th>
-          <th class="col-2">HỌ TÊN SV</th>
-          <th>TÊN ĐỀ TÀI TIẾNG VIỆT</th>
-          <th>TÊN ĐỀ TÀI TIẾNG ANH</th>
-          <th>NGÀY</th>
-          <th>GIỜ</th>
-          <th>GV HƯỚNG DẪN</th>
-          <th class="col-2">HỘI ĐỒNG</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="(row, index) in sortedData">
-          <tr
-            :key="index"
-            v-if="row.ngay === sortedData[0].ngay"
-          >
-            <td>{{ index + 1 }}</td>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>MSSV</th>
+            <th class="col-2">HỌ TÊN SV</th>
+            <th>TÊN ĐỀ TÀI TIẾNG VIỆT</th>
+            <th>TÊN ĐỀ TÀI TIẾNG ANH</th>
+            <th>NGÀY</th>
+            <th>GIỜ</th>
+            <th>GV HƯỚNG DẪN</th>
+            <th class="col-2">HỘI ĐỒNG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(row, i) in sortedData" :key="i">
+            <td>{{ row.index }}</td>
             <td>{{ row.mssv }}</td>
             <td>{{ row.namesv }}</td>
             <td>{{ row.nameProjectVi }}</td>
             <td>{{ row.nameProjectEn }}</td>
             <td>{{ row.ngay }}</td>
-            <td>{{ availableTimes[index] }}</td>
+            <td>{{ availableTimes[row.index - 1] }}</td>
             <td>{{ row.gvhd }}</td>
             <td>
               {{ row.tenchutich }} <br />
@@ -37,9 +35,9 @@
               {{ row.tenthuky }}
             </td>
           </tr>
-        </template>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -55,13 +53,23 @@ export default {
     };
   },
   computed: {
+    //sap xep lai du lieu va reset index = 1 khi ngay thay doi
     sortedData() {
-      return this.mergedData.sort((a, b) => {
-        const dateA = new Date(`2022/${a.ngay}`); // chuyển ngày sang định dạng Date để so sánh
-        const dateB = new Date(`2022/${b.ngay}`);
-        return dateA - dateB; // sắp xếp tăng dần theo ngày
-      });
+      let index = 1;
+      let lastDate = null;
+      return this.mergedData
+        .sort((a, b) => new Date(`2022/${a.ngay}`) - new Date(`2022/${b.ngay}`))
+        .map((row) => {
+          if (lastDate !== null && lastDate < row.ngay) {
+            index = 1;
+          }
+          row.index = index;
+          index++;
+          lastDate = row.ngay;
+          return row;
+        });
     },
+    //merge 2 bang student va hoidong lai voi nhau tai gvhd = tenthuuky
     mergedData() {
       try {
         const mergedData = [];
@@ -86,11 +94,11 @@ export default {
           const hoidong = this.hoidongs.find(
             (hd) => hd.tenthuky === student.GVHD
           );
-          mergedRow.ngay = hoidong ? hoidong.thoigian : "Sai ngay";
-          mergedRow.gio = hoidong ? hoidong.gio : "Sai gio";
-          mergedRow.tenchutich = hoidong ? hoidong.tenchutich : "Sai chu tich";
-          mergedRow.tenuyvien = hoidong ? hoidong.tenuyvien : "Sai chu tich";
-          mergedRow.tenthuky = hoidong ? hoidong.tenthuky : "Sai thu ky";
+          mergedRow.ngay = hoidong ? hoidong.thoigian : "null";
+          mergedRow.gio = hoidong ? hoidong.gio : "null";
+          mergedRow.tenchutich = hoidong ? hoidong.tenchutich : "null";
+          mergedRow.tenuyvien = hoidong ? hoidong.tenuyvien : "null";
+          mergedRow.tenthuky = hoidong ? hoidong.tenthuky : "null";
           mergedData.push(mergedRow);
         }
         return mergedData;
@@ -99,7 +107,9 @@ export default {
       }
     },
   },
+
   mounted() {
+    //get student
     axios
       .get("/api/students")
       .then((response) => {
@@ -108,6 +118,7 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+    //get hoidong
     axios
       .get("/api/hoidong")
       .then((response) => {
@@ -116,7 +127,7 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-
+    //tao mot bang chua thoi gian 7h-11h, 13h-17h cach nhau 40p
     const times = [];
     for (let hour = 7; hour <= 11; hour++) {
       for (let minute = 0; minute < 60; minute += 40) {
@@ -137,8 +148,8 @@ export default {
         );
       }
     }
+    //gan bang times vua tao vao availbaleTime
     this.availableTimes = times;
-    console.log(this.sortedData);
   },
 };
 </script>
