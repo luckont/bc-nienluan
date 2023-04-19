@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <h4 class="mb-4 text-center">DANH SÁCH SINH VIÊN ĐÃ ĐĂNG KÝ</h4>
-    <StudentList />
+    <StudentList/>
   </div>
 </template>
 

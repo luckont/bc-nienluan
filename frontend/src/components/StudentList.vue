@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th>STT</th>
-          <th>Name</th>
+          <th>Tên Sinh Viên</th>
           <th>MSSV</th>
           <th>Email</th>
           <th>Tên Tiếng Việt</th>
@@ -15,7 +15,7 @@
       <tbody>
         <tr v-for="(student, index) in students" :key="student.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ student.name }}</td>
+          <td class="col-2">{{ student.name }}</td>
           <td>{{ student.mssv }}</td>
           <td>{{ student.email }}</td>
           <td>{{ student.nameProjectVi }}</td>
@@ -31,10 +31,10 @@
 import axios from "axios";
 
 export default {
-  data() {
+  data(){
     return {
       students: [],
-    };
+    }
   },
   mounted() {
     this.getStudents();

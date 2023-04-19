@@ -11,8 +11,9 @@
             <th>STT</th>
             <th>MSSV</th>
             <th class="col-2">HỌ TÊN SV</th>
-            <th>TÊN ĐỀ TÀI TIẾNG VIỆT</th>
-            <th>TÊN ĐỀ TÀI TIẾNG ANH</th>
+            <th class="col-2">TÊN ĐỀ TÀI TIẾNG VIỆT</th>
+            <th class="col-2">TÊN ĐỀ TÀI TIẾNG ANH</th>
+            <th>PHÒNG</th>
             <th>NGÀY</th>
             <th>GIỜ</th>
             <th>GV HƯỚNG DẪN</th>
@@ -21,11 +22,12 @@
         </thead>
         <tbody>
           <tr v-for="(row, i) in sortedData" :key="i">
-            <td>{{ row.index }}</td>
+            <td>{{ i + 1 }}</td>
             <td>{{ row.mssv }}</td>
             <td>{{ row.namesv }}</td>
             <td>{{ row.nameProjectVi }}</td>
             <td>{{ row.nameProjectEn }}</td>
+            <td>{{ row.phong }}</td>
             <td>{{ row.ngay }}</td>
             <td>{{ availableTimes[row.index - 1] }}</td>
             <td>{{ row.gvhd }}</td>
@@ -81,6 +83,7 @@ export default {
             nameProjectEn: "",
             ngay: "",
             gio: "",
+            phong: "",
             gvhd: "",
             tenchutich: "",
             tenuyvien: "",
@@ -96,6 +99,7 @@ export default {
           );
           mergedRow.ngay = hoidong ? hoidong.thoigian : "null";
           mergedRow.gio = hoidong ? hoidong.gio : "null";
+          mergedRow.phong = hoidong ? hoidong.phong : "null";
           mergedRow.tenchutich = hoidong ? hoidong.tenchutich : "null";
           mergedRow.tenuyvien = hoidong ? hoidong.tenuyvien : "null";
           mergedRow.tenthuky = hoidong ? hoidong.tenthuky : "null";
@@ -150,6 +154,8 @@ export default {
     }
     //gan bang times vua tao vao availbaleTime
     this.availableTimes = times;
+
+
   },
 };
 </script>

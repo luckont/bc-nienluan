@@ -3,9 +3,14 @@
     <div class="col-4 border border-end rounded">
       <h4 class="p-2">Thông tin cá nhân</h4>
       <div class="p-2">
-        <p>Họ tên sinh viên: {{ users.name }}</p>
-        <p>Mã số sinh viên: {{ users.mssv }}</p>
-        <p>Email: {{ users.email }}</p>
+        <img
+          class="mb-2"
+          src="https://elearning.ctu.edu.vn/theme/image.php/lambda/core/1675223774/u/f1"
+          alt="avatar"
+        />
+        <p>Họ tên sinh viên: <strong>{{ users.name }}</strong></p>
+        <p>Mã số sinh viên: <strong>{{ users.mssv }}</strong></p>
+        <p>Email: <strong>{{ users.email }}</strong></p>
       </div>
     </div>
     <div class="col-8 rounded">

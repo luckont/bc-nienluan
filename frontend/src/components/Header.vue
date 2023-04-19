@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-light bg-light p-0">
+    <nav class="navbar">
       <div class="container-fluid">
         <router-link to="/home">
           <img
@@ -12,7 +12,7 @@
         </router-link>
       </div>
     </nav>
-    <ul class="nav bg-dark text-light p-2">
+    <ul class="nav text-light p-2">
       <li class="nav-item">
         <router-link to="/home">Trang chủ</router-link>
       </li>
@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 ul {
+  background-color: #3A454B;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -73,6 +74,7 @@ ul {
 ul li {
   display: inline-block;
   margin-right: 1rem;
+  padding: 5px;
 }
 
 ul li:last-child {
@@ -82,8 +84,9 @@ ul li:last-child {
 ul li a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   transition: color 0.2s ease-in-out;
+  font-family:Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 ul li a:hover {
@@ -98,4 +101,13 @@ button {
   border: 2px solid #007bff;
   padding: 0 10px;
 }
+.navbar {
+  border-top: 5px solid #1C57A5;
+  padding: 20px 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), 
+  url('https://www.ctu.edu.vn/images/2022/08/12/hitech-2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
 </style>

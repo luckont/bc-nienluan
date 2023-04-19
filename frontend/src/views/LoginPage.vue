@@ -2,8 +2,9 @@
   <div class="container">
     <div class="row justify-content-center mt-5">
       <div class="col-md-6">
+        <h2 class="text-center pb-4">Welcome to CTU E-learning!</h2>
         <div class="card">
-          <div class="card-header"><h1>Đăng nhập</h1></div>
+          <p v-if="error" class="card-header text-danger" style="background-color: #f2dede;">{{ error }}</p>
           <div class="card-body">
             <form @submit.prevent="login">
               <div class="form-group fg">
@@ -41,6 +42,7 @@ export default {
     return {
       username: "",
       password: "",
+      error: "",
     };
   },
   methods: {
@@ -80,6 +82,7 @@ export default {
 }
 .card {
   width: 100%;
+  background-color: #eeeeee;
 }
 
 .btn-primary {
