@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <tr v-for="(row, i) in sortedData" :key="i">
-            <td>{{ i + 1 }}</td>
+            <td>{{ row.index }}</td>
             <td>{{ row.mssv }}</td>
             <td>{{ row.namesv }}</td>
             <td>{{ row.nameProjectVi }}</td>
@@ -57,6 +57,7 @@ export default {
   computed: {
     //sap xep lai du lieu va reset index = 1 khi ngay thay doi
     sortedData() {
+      const mssvL = localStorage.getItem("mssv");
       let index = 1;
       let lastDate = null;
       return this.mergedData
@@ -68,6 +69,13 @@ export default {
           row.index = index;
           index++;
           lastDate = row.ngay;
+          if (row.mssv === mssvL && row.ngay !== "null") {
+            // this.getGio.push(row.ngay);
+            // this.getGio.push(index)
+            // this.getGio.push(this.availableTimes[index-2]);
+            localStorage.setItem("ngay", row.ngay);
+            localStorage.setItem("gio", this.availableTimes[index-2]);
+          }
           return row;
         });
     },
@@ -154,8 +162,6 @@ export default {
     }
     //gan bang times vua tao vao availbaleTime
     this.availableTimes = times;
-
-
   },
 };
 </script>

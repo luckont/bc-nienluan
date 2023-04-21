@@ -16,7 +16,7 @@
     <div class="col-8 rounded">
       <h4 class="p-2">Thông tin đăng ký báo cáo</h4>
       <div class="p-2" v-if="students.mssv">
-        <p><strong>Thời gian báo cáo: </strong></p>
+        <p><strong>Thời gian báo cáo: {{ gio }} {{ ngay }} </strong></p>
         <p>Tên đề tài tiếng việt: {{ students.nameProjectVi }}</p>
         <p>Tên đề tài tiếng Anh: {{ students.nameProjectEn }}</p>
         <p>Giảng viên hướng dẫn: {{ students.GVHD }}</p>
@@ -51,11 +51,15 @@ export default {
     return {
       users: [],
       students: [],
+      ngay: '',
+      gio: '',
     };
   },
   mounted() {
     this.getUsers();
     this.getStudents();
+    this.ngay = localStorage.getItem("ngay");
+    this.gio = localStorage.getItem("gio");
   },
   methods: {
     async getUsers() {

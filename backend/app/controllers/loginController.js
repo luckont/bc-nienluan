@@ -10,8 +10,8 @@ module.exports = {
       const auth = new UsersService(MongoDB.client);
       const user = await auth.findName({username: username});
      
-      if(!user)  return res.status(400).json({message: 'Username not found'})
-      if(user.password !== password) return res.status(400).json({message: 'password invalid'})
+      if(!user)  return res.status(400).json({message: 'Vui lòng nhập đầy đủ thông tin !'})
+      if(user.password !== password) return res.status(400).json({message: 'Mật khẩu chưa đúng !'})
       // res.json({ token });
 
       return res.status(200).json({state:'success',username,id:user._id,mssv:user.mssv})

@@ -46,10 +46,7 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem("mssv");
-      localStorage.removeItem("idDK");
-      localStorage.removeItem("id");
-      localStorage.removeItem("username");
+      localStorage.clear();
       this.$router.push("/").then(() => {
         location.reload();
       });
