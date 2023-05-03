@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <tr v-for="(row, i) in sortedData" :key="i">
-            <td>{{ row.index }}</td>
+            <td>{{ i + 1 }}</td>
             <td>{{ row.mssv }}</td>
             <td>{{ row.namesv }}</td>
             <td>{{ row.nameProjectVi }}</td>
@@ -61,7 +61,15 @@ export default {
       let index = 1;
       let lastDate = null;
       return this.mergedData
-        .sort((a, b) => new Date(`2022/${a.ngay}`) - new Date(`2022/${b.ngay}`))
+        .sort((a, b) => {
+          const dateA = new Date(
+            `2022/${a.ngay.split("/").reverse().join("/")}`
+          );
+          const dateB = new Date(
+            `2022/${b.ngay.split("/").reverse().join("/")}`
+          );
+          return dateA - dateB;
+        })
         .map((row) => {
           if (lastDate !== null && lastDate < row.ngay) {
             index = 1;
@@ -74,12 +82,13 @@ export default {
             // this.getGio.push(index)
             // this.getGio.push(this.availableTimes[index-2]);
             localStorage.setItem("ngay", row.ngay);
-            localStorage.setItem("gio", this.availableTimes[index-2]);
+            localStorage.setItem("gio", this.availableTimes[index - 2]);
+            localStorage.setItem("phong", row.phong)
           }
           return row;
         });
     },
-    //merge 2 bang student va hoidong lai voi nhau tai gvhd = tenthuuky
+    //merge 2 bang student va hoidong lai voi nhau tai gvhd = tenthuuky 
     mergedData() {
       try {
         const mergedData = [];
@@ -139,10 +148,10 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-    //tao mot bang chua thoi gian 7h-11h, 13h-17h cach nhau 40p
+    //tao mot bang chua thoi gian 7h-11h, 13h-17h cach nhau 30p
     const times = [];
     for (let hour = 7; hour <= 11; hour++) {
-      for (let minute = 0; minute < 60; minute += 40) {
+      for (let minute = 0; minute < 60; minute += 30) {
         times.push(
           `${hour.toString().padStart(2, "0")}:${minute
             .toString()
@@ -152,7 +161,7 @@ export default {
     }
     times.push("13:30");
     for (let hour = 14; hour <= 17; hour++) {
-      for (let minute = 0; minute < 60; minute += 40) {
+      for (let minute = 0; minute < 60; minute += 30) {
         times.push(
           `${hour.toString().padStart(2, "0")}:${minute
             .toString()
@@ -162,6 +171,7 @@ export default {
     }
     //gan bang times vua tao vao availbaleTime
     this.availableTimes = times;
+    console.log(this.availableTimes);
   },
 };
 </script>

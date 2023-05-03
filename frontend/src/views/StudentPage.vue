@@ -16,11 +16,12 @@
     <div class="col-8 rounded">
       <h4 class="p-2">Thông tin đăng ký báo cáo</h4>
       <div class="p-2" v-if="students.mssv">
-        <p><strong>Thời gian báo cáo: {{ gio }} {{ ngay }} </strong></p>
-        <p>Tên đề tài tiếng việt: {{ students.nameProjectVi }}</p>
-        <p>Tên đề tài tiếng Anh: {{ students.nameProjectEn }}</p>
-        <p>Giảng viên hướng dẫn: {{ students.GVHD }}</p>
-        <p>Thời gian đăng ký: {{ students.timeCreate }}</p>
+        <p><strong>Thời gian báo cáo: {{ gio }} {{ ngay }}/2023</strong></p>
+        <p>Phòng báo cáo: <strong>{{ phong }}</strong></p>
+        <p>Tên đề tài tiếng việt: <strong>{{ students.nameProjectVi }}</strong></p>
+        <p>Tên đề tài tiếng Anh: <strong>{{ students.nameProjectEn }}</strong></p>
+        <p>Giảng viên hướng dẫn: <strong>{{ students.GVHD }}</strong></p>
+        <p>Thời gian đăng ký: <strong>{{ students.timeCreate }}</strong></p>
         <strong
           >Lưu ý: Thí sinh phải có mặt trước 15p trước giờ báo cáo tại hội đồng
           báo cáo !</strong
@@ -60,6 +61,7 @@ export default {
     this.getStudents();
     this.ngay = localStorage.getItem("ngay");
     this.gio = localStorage.getItem("gio");
+    this.phong = localStorage.getItem("phong");
   },
   methods: {
     async getUsers() {
